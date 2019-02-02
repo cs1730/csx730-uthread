@@ -146,7 +146,6 @@ Here is a table that briely outlines each file in the skeleton code:
 | `SUBMISSION.md`           | Student submission information.                                  |
 | `csx730_uthread.c`        | Where you will put most of your thread implementation.           |
 | `csx730_uthread.h`.       | Thread structures, function prototypes, and macros.              |
-| `csx730_uthread_driver.c` | Where the `main` method lives for the  __[DRIVER]__ requirement. |
 
 If any updates to the project files are announced by your instructor, you can
 merge those changes into your copy by changing into your project directory
@@ -171,19 +170,26 @@ There will be no partial credit for any of the requirements that simply
 require the presence of a function related a particular functionality. 
 The actual functionality is tested using test cases.
 
-1. __(?? points) Implement `csx730_uthreads.h` functions in `csx730_uthreads.c`.__
-   Each of the functions whose prototype appears in the header must
-   be implemented correctly in the corresponding `.c` file.
-   Here is a list of the functions:
+1. __(100 points) Implement `csx730_uthreads.h` functions in `csx730_uthreads.c`.__
+   Each of the functions whose prototype appears in the header and does not require
+   the `_CS6760_SOURCE` feature test macro must  be implemented correctly in the
+   corresponding `.c` file. Here is a list of the functions:
 
-   * __(?? points)__ `void foo(void)`
-   * __(?? points)__ `void bar(void)`    
+   * __(10 points)__ `void uthread_clear(uthread *);`
+   * __(20 points)__ `int uthread_create(uthread *, uthread_func *, uthread_arg, size_t);`
+   * __(20 points)__ `void uthread_exit(void);`
+   * __(20 points)__ `void uthread_join(uthread *);`
+   * __(10 points)__ `uthread * uthread_self(void);`
+   * __(20 points)__ `void _uthread_schedule(void);`
 
    The documentation for each function is provided directly in
    the header. You may generate an HTML version of the corresponding
    documentation using the `doc` target provided by the project's `Makefile`.
    Students should not modify the prototypes for these functions in any way--doing
-   so will cause the tester used by the grader to fail. 
+   so will cause the tester used by the grader to fail.
+
+   You are free and actively encourage to write other functions, as needed, to
+   support the required set of functions.
 
 ### 6730 Requirements
 
