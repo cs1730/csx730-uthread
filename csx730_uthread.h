@@ -179,7 +179,6 @@ uthread * uthread_self(void);
 // _CS6730_SOURCE FEATURES
 //------------------------------------------------------------------------------------------------//
 #ifdef _CS6730_SOURCE
-#include "csx730_uthread_priority.h"
 
 /** 
  * Low priority value.

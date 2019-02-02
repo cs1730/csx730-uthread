@@ -170,7 +170,7 @@ There will be no partial credit for any of the requirements that simply
 require the presence of a function related a particular functionality. 
 The actual functionality is tested using test cases.
 
-1. __(100 points) Implement `csx730_uthreads.h` functions in `csx730_uthreads.c`.__
+1. __(100 points) Implement `csx730_uthread.h` functions in `csx730_uthread.c`.__
    Each of the functions whose prototype appears in the header and does not require
    the `_CS6760_SOURCE` feature test macro must  be implemented correctly in the
    corresponding `.c` file. Here is a list of the functions:
