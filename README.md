@@ -69,6 +69,13 @@ __asm__("movq %0, %%rsp;" // AssemblerTemplate
 some_func();
 ```
 
+Please note that in some cases it may be favorable to move the actual function
+call into the `__asm__` block (or even an `__asm__ volatile` block), e.g., using
+the `callq` instruction, in order to prevent the compiler from changing the
+relative order of relevant instructions. If the function you intend to run on
+the new stack requires arguments, then you may also need to manually move the 
+values into the argument registers before changing the stack pointer. 
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
