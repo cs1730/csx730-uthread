@@ -127,6 +127,7 @@ void uthread_clear(uthread * thread);
  *   - @c ENOMEM the value of @p stack_size is less than @c UTHREAD_MIN_STACK_SIZE
  * This function does not, itself, change the value of @c errno.
  *
+ * @remark @c _CS6730_SOURCE causes the thread's priority to default to @c UTHREAD_PRIORITY_NORMAL.
  * @param thread     pointer to user-mode thread
  * @param func       pointer to start function
  * @param arg        start function argument
@@ -165,6 +166,50 @@ uthread * uthread_self(void);
 //------------------------------------------------------------------------------------------------//
 #ifdef _CS6730_SOURCE
 #include "csx730_uthread_priority.h"
+
+/** 
+ * Low priority value.
+ * @remark Requires @c _CS6730_SOURCE.
+ */
+#define UTHREAD_PRIORITY_LOW 10L
+
+/** 
+ * Normal priority value.
+ * @remark Requires @c _CS6730_SOURCE.
+ */
+#define UTHREAD_PRIORITY_NORMAL 5L
+
+/** 
+ * High priority value.
+ * @remark Requires @c _CS6730_SOURCE.
+ */
+#define UTHREAD_PRIORITY_HIGH 0L
+
+/**
+ * Initializes and runs a user-mode thread within the calling process. The new thread starts in the
+ * function @p func which has a single argument @p arg. The new thread has its own stack space, the
+ * size of which, in bytes, is specified by @p stack_size. The macro constant @c UTHREAD_STACK_SIZE
+ * is available to provide a good default stack size. Upon termination of the thread, its stack
+ * is deallocated.
+ *
+ * <p>
+ * If the function succeeds, it will return @c 0 and run the thread; otherwise, an error number
+ * shall be returned indicating the error:
+ *   - @c EAGAIN resources unavailable for stack allocation
+ *   - @c EINVAL the value of @p thread or @p func is @c NULL
+ *   - @c ENOMEM the value of @p stack_size is less than @c UTHREAD_MIN_STACK_SIZE
+ * This function does not, itself, change the value of @c errno.
+ *
+ * @param thread     pointer to user-mode thread
+ * @param func       pointer to start function
+ * @param arg        start function argument
+ * @param stack_size thread stack size; must be @c >= @c UTHREAD_MIN_STACK_SIZE
+ * @param priority   thread priority
+ * @return @c 0 on succes; otherwise, an error number indicating the error
+ */
+int uthread_create_priority(uthread * thread, uthread_func * func, uthread_arg arg,
+			    size_t stack_size, unsigned long priority);
+
 
 #endif // _CS6730_SOURCE
 

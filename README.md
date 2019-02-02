@@ -192,16 +192,14 @@ for students enrolled in CSCI 6730 and a functional requirement for students enr
 CSCI 4730. This effectively provides an extra credit opportunity to the undergraduate
 students and a non-compliance penalty for the graduate students.
 
-1. __(10 points) [PRIORITY] Implement `csx730_uthread_priority.h` functions in `csx730_uthread_priority.c`__
-   Each of the functions whose prototype appears in the header must
-   be implemented correctly in the corresponding `.c` file. This implements
-   the `_CS6730_UTHREAD_PRIORITY` set of features:
+1. __(10 points) [PRIORITY] Implement `_CS6730_SOURCE` features`__
+   The `_CS6730_SOURCE` feature test macro should enable the following set of features:
    
    * Each thread has an associated priority.
    * Scheduler uses a priority queue.
+   * The `uthread_create_priority` function.
    
-   You are expected to implement a priority queue using a heap data structure to satisfy
-   this requirement.
+   Students are expected to implement a priority queue using a max heap to satisfy this requirement.
 
 ### Non-Functional Requirements
 
