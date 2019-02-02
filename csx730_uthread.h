@@ -110,6 +110,7 @@ typedef struct {
   uthread_state state;    /**< thread state */
   uthread_stack stack;    /**< thread stack */
   uthread_ctx   ctx;      /**< thread context */
+  uthread *     join;     /**< thread to join */
   unsigned long priority; /**< thread priority */
 } uthread;
 
