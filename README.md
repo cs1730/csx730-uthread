@@ -160,9 +160,16 @@ being subtracted from your point total. That is, they are all or nothing.
 
 1. __(100 points) Libraries:__ You are allowed to use any of the C standard library
    functions. A reference is provided [here](https://en.cppreference.com/w/c).
-   No other libraries are permitted, especially `pthreads`. You are also not
-   allowed to use any of the following library functions: `setjmp(3)`, `sigsetjmp(3)`, 
-   `longjmp(3)`, and `siglongjmp(3)`.
+   No other libraries are permitted, especially `pthreads`. You are also **NOT**
+   allowed to use any of the following: 
+   * `setjmp(3)`, 
+   * `sigsetjmp(3)`, 
+   * `longjmp(3)`, 
+   * `siglongjmp(3)`,
+   * `getcontext(2)`, 
+   * `setcontext(2)`, 
+   * `makecontext(3)`, and 
+   * `swapcontext(3)`.
 
 1. __(100 points) `SUBMISSION.md`:__ Your project must include a properly formatted 
    `SUBMISSION.md` file that includes, at a minimum, the following information:
