@@ -169,7 +169,7 @@ require the presence of a function related a particular functionality.
 The actual functionality is tested using test cases.
 
 1. __(?? points) Implement `csx730_uthreads.h` functions in `csx730_uthreads.c`.__
-   Each of the functions whose prototype appears in the header  must
+   Each of the functions whose prototype appears in the header must
    be implemented correctly in the corresponding `.c` file.
    Here is a list of the functions:
 
@@ -189,10 +189,16 @@ for students enrolled in CSCI 6730 and a functional requirement for students enr
 CSCI 4730. This effectively provides an extra credit opportunity to the undergraduate
 students and a non-compliance penalty for the graduate students.
 
-1. __(?? points) [REQNAME] Implement something...__
-   Description here.
+1. __(10 points) [PRIORITY] Implement `csx730_uthreads_priority.h` functions in `csx730_uthreads_priority.c`__
+   Each of the functions whose prototype appears in the header must
+   be implemented correctly in the corresponding `.c` file. This implements
+   the `_CS6730_UTHREAD_PRIORITY` set of features:
    
-1. __(?? points) [PRIORITY] Implement `_CSX6760_UTHREAD_PRIORITY` features.__
+   * Each thread has an associated priority.
+   * Scheduler uses a priority queue.
+   
+   You are expected to implement a priority queue using a heap data structure to satisfy
+   this requirement.
 
 ### Non-Functional Requirements
 
