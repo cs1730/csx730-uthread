@@ -86,6 +86,18 @@ the values of the relevant registers. To simulate `longjmp(3)`, restore the regi
 values, then return to the previously saved environment by setting the stack pointer
 and manually returning. 
 
+At a minimum, the following registers should be saved on an `x86` machine:
+
+| Register | Description            |
+|----------|------------------------|
+| `rsp`    | register stack pointer |
+| `rbp`    | register base pointer  |
+| `rbx`    | register b extended    |
+| `r12`    | register 12            |
+| `r13`    | register 13            |
+| `r14`    | register 14            |
+| `r15`    | register 15            |
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
