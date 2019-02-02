@@ -26,9 +26,9 @@ managed independently by a scheduler. A __user-mode thread__, sometimes referred
 _fiber_, is one that is scheduled in user mode instead of kernel mode. In user mode,
 only a single thread can execute at a time. After some time, the current thread that
 is executing will be temporarily interrupted by some signal, the disposition of which
-should save the state of the thread, then context switch to another thread without 
-requiring either thread's cooperation. The basic idea is that these context switches 
-should occur so quickly that all threads appear to execute concurrently.
+should context switch to another thread without requiring either thread's cooperation.
+The basic idea is that these context switches should occur so quickly that all threads 
+appear to execute concurrently.
 
 Each thread gets its own stack that is separate from the stack of the calling process
 but somewhere within the process's virtual memory space. While this new stack space
@@ -46,6 +46,7 @@ Other project details are provided below.
 ## Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
+* [X86 64 Register and Instruction Quick Start](https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start)
 * [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
 * [C Typedef Declaration](https://en.cppreference.com/w/c/language/typedef)
 * [`mmap(2)`](http://man7.org/linux/man-pages/man2/mmap.2.html)
@@ -75,6 +76,13 @@ the `callq` instruction, in order to prevent the compiler from changing the
 relative order of relevant instructions. If the function you intend to run on
 the new stack requires arguments, then you may also need to manually move the 
 values into the argument registers before changing the stack pointer. 
+
+## How to Implement the Context Switch
+
+Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
+this too can be done using an `__asm__` block. To simulate `setjmp(3)`, save
+the values of the relevant registers. To simulate `longjmp(3)`, restore the register 
+values, then return the previously saved environment. 
 
 ## How to Get the Skeleton Code
 
