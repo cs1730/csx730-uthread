@@ -195,11 +195,14 @@ students and a non-compliance penalty for the graduate students.
 1. __(10 points) [PRIORITY] Implement `_CS6730_SOURCE` features`__
    The `_CS6730_SOURCE` feature test macro should enable the following set of features:
    
-   * Each thread has an associated priority.
-   * Scheduler uses a priority queue.
+   * Individual thread priority.
+   * Priority queue scheduling.
    * The `uthread_create_priority` function.
-   
-   Students are expected to implement a priority queue using a max heap to satisfy this requirement.
+
+   Additionally, `_CS6760_SOURCE` also changes the default behavior of the `uthread_create`
+   function to default user-mode thread's priority to `UTHREAD_PRIORITY_NORMAL`.
+   Students are expected to implement a priority queue using a max heap to satisfy the
+   scheduling requirement.
 
 ### Non-Functional Requirements
 
