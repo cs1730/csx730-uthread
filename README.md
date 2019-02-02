@@ -23,8 +23,8 @@ notice and licensing information at the bottom of this document.
 
 A thread of execution is the smallest sequence of programmed instructions that can be 
 managed independently by a scheduler. A __user-mode thread__, sometimes referred to as a
-_fiber_ is one that is scheduled in user mode instead of kernel mode. In this project, 
-you are tasked with implementing a preemptive multitasking user-mode thread library 
+_fiber_, is one that is scheduled in user mode instead of kernel mode. In this project, 
+you are tasked with implementing a preemptive multitasking, user-mode thread library 
 in C and a little bit of x86 assembly! Some starter code is provided. 
 Other project details are provided below.
 
