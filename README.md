@@ -53,6 +53,7 @@ Other project details are provided below.
 * [`mmap(2)`](http://man7.org/linux/man-pages/man2/mmap.2.html)
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
+* [`sigprocmask(2)`](http://man7.org/linux/man-pages/man2/sigprocmask.2.html)
 
 ## How to Change the Stack Pointer
 
