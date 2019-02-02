@@ -36,8 +36,9 @@ Other project details are provided below.
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
 * [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
-* [C `typedef` Declaration](https://en.cppreference.com/w/c/language/typedef)
+* [C Typedef Declaration](https://en.cppreference.com/w/c/language/typedef)
 * [`getittimer(2)`, `setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
+* [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 
 ## How to Get the Skeleton Code
 
