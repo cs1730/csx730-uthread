@@ -161,7 +161,7 @@ being subtracted from your point total. That is, they are all or nothing.
 1. __(100 points) Libraries:__ You are allowed to use any of the C standard library
    functions. A reference is provided [here](https://en.cppreference.com/w/c).
    No other libraries are permitted, especially `pthreads`. You are also **NOT**
-   allowed to use any of the following: 
+   allowed to use any of the following to implement the context switch: 
    * `setjmp(3)`, 
    * `sigsetjmp(3)`, 
    * `longjmp(3)`, 
