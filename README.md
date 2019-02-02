@@ -56,7 +56,7 @@ Other project details are provided below.
 
 You can easily move the stack pointer using 
 [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
-in GCC. Assumes that compiler optimizations are disabled, the following example 
+in GCC. Assuming that compiler optimizations are disabled, the following example 
 should move the address stored in `rsptr` into the register for the stack pointer
 before calling a function called `some_func`:
 
