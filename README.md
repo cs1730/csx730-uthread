@@ -23,21 +23,25 @@ notice and licensing information at the bottom of this document.
 
 A thread of execution is the smallest sequence of programmed instructions that can be 
 managed independently by a scheduler. A __user-mode thread__, sometimes referred to as a
-_fiber_, is one that is scheduled in user mode instead of kernel mode. 
+_fiber_, is one that is scheduled in user mode instead of kernel mode. In user mode,
+only a single thread can execute at a time. After some time, the current thread that
+is executing will be temporarily interrupted by some signal, the disposition of which
+should save the state of the thread, then context switch to another thread without 
+requiring either thread's cooperation. The basic idea is that these context switches 
+should occur so quickly that all threads appear to execute concurrently.
 
 Each thread gets its own stack that is separate from the stack of the calling process
 but somewhere within the process's virtual memory space. While this new stack space
-can be allocated using `malloc(2)`, use of `mmap(2)` is recommended as it guarantees
-the memory will be allocated at a nearby page boundary. 
-
+can be allocated using `malloc(3)`, use of `mmap(2)` is recommended as it guarantees
+the memory will be allocated at a nearby page boundary. You should 
+[actively avoid](https://lwn.net/Articles/294001/) use of the `MAP_GROWSDOWN` 
+flag when using `mmap`. If you are allocating memory for a stack using `mmap(2)`, 
+then simply treat the returned pointer to the mapped area as the end of the stack, 
+then add the stack size to compute the initial stack pointer value.
 
 In this project, you are tasked with implementing a preemptive multitasking, user-mode 
 thread library in C and a little bit of x86 assembly! Some starter code is provided. 
 Other project details are provided below.
-
-```
-
-```
 
 ## Useful References
 
@@ -48,12 +52,22 @@ Other project details are provided below.
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 
-## Note about `mmap` and `MAP_GROWSDOWN`
+## How to Move the Stack Pointer
 
-You should [actively avoid](https://lwn.net/Articles/294001/) use of the `MAP_GROWSDOWN` 
-flag when using `mmap`. If you are allocating memory for a stack, simply treat the
-pointer to the mapped area as the end of the stack, then add the stack size to compute
-the initial stack pointer value.
+You can easily move the stack pointer using 
+[Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
+in GCC. Assumes that compiler optimizations are disabled, the following example 
+should move the stack pointer to the address stored in `rsptr` before calling 
+a function called `some_func`:
+
+```c
+void * rsptr = // some address
+__asm__("movq %0, %%rsp;" // AssemblerTemplate
+	  :                    // OutputOperands
+	  : "r"(rsptr)         // InputOperands
+	  : "rsp");            // Clobbers
+some_func();
+```
 
 ## How to Get the Skeleton Code
 
@@ -146,7 +160,9 @@ being subtracted from your point total. That is, they are all or nothing.
 
 1. __(100 points) Libraries:__ You are allowed to use any of the C standard library
    functions. A reference is provided [here](https://en.cppreference.com/w/c).
-   No other libraries are permitted, especially `pthreads`.
+   No other libraries are permitted, especially `pthreads`. You are also not
+   allowed to use any of the following library functions: `setjmp(3)`, `sigsetjmp(3)`, 
+   `longjmp(3)`, and `siglongjmp(3)`.
 
 1. __(100 points) `SUBMISSION.md`:__ Your project must include a properly formatted 
    `SUBMISSION.md` file that includes, at a minimum, the following information:
