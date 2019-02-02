@@ -86,7 +86,8 @@ the values of the relevant registers. To simulate `longjmp(3)`, restore the regi
 values, then return to the previously saved environment by setting the stack pointer
 and manually returning. 
 
-At a minimum, the following registers should be saved on an `x86` machine:
+At a minimum, the following 64 bit registers should be saved on an `x86` machine, as
+they are registers that called routines are expected to preserve:
 
 | Register | Description            |
 |----------|------------------------|
