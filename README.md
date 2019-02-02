@@ -52,7 +52,7 @@ Other project details are provided below.
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 
-## How to Move the Stack Pointer
+## How to Change the Stack Pointer
 
 You can easily move the stack pointer using 
 [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
