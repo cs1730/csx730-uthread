@@ -44,7 +44,7 @@ In this project, you are tasked with implementing a preemptive multitasking, use
 thread library in C and a little bit of x86 assembly! Some starter code is provided. 
 Other project details are provided below.
 
-### Useful References
+## Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
 * [X86 64 Register and Instruction Quick Start](https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start)
@@ -54,7 +54,7 @@ Other project details are provided below.
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 
-### How to Change the Stack Pointer
+## How to Change the Stack Pointer
 
 You can easily move the stack pointer using 
 [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
@@ -79,7 +79,7 @@ in-between assembly blocks. If the function you intend to run on
 the new stack requires arguments, then you may also need to manually move the 
 values into the argument registers before changing the stack pointer. 
 
-### How to Implement the Context Switch
+## How to Implement the Context Switch
 
 Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
 this too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
@@ -191,6 +191,8 @@ students and a non-compliance penalty for the graduate students.
 
 1. __(?? points) [REQNAME] Implement something...__
    Description here.
+   
+1. __(?? points) [PRIORITY] Implement `_CSX6760_UTHREAD_PRIORITY` features.__
 
 ### Non-Functional Requirements
 
@@ -210,9 +212,10 @@ being subtracted from your point total. That is, they are all or nothing.
    do the same with the `test` target.
 
 1. __(100 points) Libraries:__ You are allowed to use any of the C standard library
-   functions. A reference is provided [here](https://en.cppreference.com/w/c).
+   functions, unless they are explicitly forbidden below. A general reference for
+   the C standard library is provided [here](https://en.cppreference.com/w/c).
    No other libraries are permitted, especially `pthreads`. You are also **NOT**
-   allowed to use any of the following to implement the context switch: 
+   allowed to use any of the following: 
    * `setjmp(3)`, 
    * `sigsetjmp(3)`, 
    * `longjmp(3)`, 
