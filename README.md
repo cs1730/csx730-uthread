@@ -21,10 +21,16 @@ notice and licensing information at the bottom of this document.
 
 ## User Space Threads
 
-MOTIVATE
+A thread of execution is the smallest sequence of programmed instructions that can be 
+managed independently by a scheduler. A user-mode thread, sometimes referred to as a
+_fiber_ is one that is scheduled in user mode instead of kernel mode. In this project, 
+you are tasked with implementing a preemptive multitasking user-mode thread library 
+in C and a little bit of x86 assembly! Some starter code is provided. 
+Other project details are provided below.
 
-In this project, you are tasked with implementing user space threads! The
-structure for thread information is provided. Other project details are provided below.
+```
+
+```
 
 ## Suggested Reading
 
@@ -33,6 +39,7 @@ structure for thread information is provided. Other project details are provided
 ## Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
+* [`getittimer(2)`, `setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 
 ## How to Get the Skeleton Code
 
