@@ -1,0 +1,47 @@
+CC=gcc
+AS=as
+CFLAGS=-std=c17 -g -Wall -O0 -pedantic-errors
+RM=rm -f
+
+.PHONY: clean all test
+
+all: doc csx730_uthread_driver
+
+csx730_uthread_driver: csx730_uthread_driver.o csx730_uthread.o
+	$(CC) -o csx730_uthread_driver $^
+
+csx730_uthread_driver.o: csx730_uthread_driver.s
+	$(AS) -o $@ $<
+
+csx730_uthread_driver.s: csx730_uthread_driver.c csx730_uthread.h
+	$(CC) $(CFLAGS) -S $<
+
+csx730_uthread.o: csx730_uthread.s
+	$(AS) -o $@ $<
+
+csx730_uthread.s: csx730_uthread.c csx730_uthread.h
+	$(CC) $(CFLAGS) -S $<
+
+test: csx730_uthread_tester
+	./csx730_uthread_tester
+
+csx730_uthread_tester: csx730_uthread_tester.o csx730_uthread.o
+	$(CC) -o csx730_uthread_tester $^
+
+csx730_uthread_tester.o: csx730_uthread_tester.s
+	$(AS) -o $@ $<
+
+csx730_uthread_tester.s: csx730_uthread_tester.c csx730_uthread.h
+	$(CC) $(CFLAGS) -S $<
+
+clean:
+	$(RM) csx730_uthread_driver
+	$(RM) csx730_uthread_tester
+	$(RM) *.o
+	$(RM) *.s
+	$(RM) -r doc
+
+doc: $(wildcard *.c) $(wildcard *.h)
+	mkdir -p doc
+	doxygen
+
