@@ -63,12 +63,12 @@ should move the address stored in `rsptr` into the register for the stack pointe
 before calling a function called `some_func`:
 
 ```c
-void * rsptr = // some address
-__asm__("movq %0, %%rsp;" // AssemblerTemplate
-	:                 // OutputOperands
-	: "r"(rsptr)      // InputOperands
-	: "rsp");         // Clobbers
-some_func();
+void * rsptr =                // some address
+__asm__("movq %0, %%rsp;"     // AssemblerTemplate
+	:                     // OutputOperands
+	: "r"(rsptr)          // InputOperands
+	: "rsp");             // Clobbers
+some_func();                  // function call on changed stack
 ```
 
 Please note that in some cases it may be favorable to move the actual function
