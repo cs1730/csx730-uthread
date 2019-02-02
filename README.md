@@ -101,24 +101,27 @@ they are registers that called routines are expected to preserve:
 | `r15`    | register 15            |
 
 This is not an exhaustive list! You may find that saving additional registers is needed.
-Creating a `typedef struct`, perhaps called `uthread_ctx`, to hold these registers is 
-recommended. Here is an example of how to save the register stack pointer to a member
-of a structure:
+A `typedef struct` called `uthread_ctx` is provided. You may add additional registers
+to the structure if you find it necesary. Here is an example of how to save the register 
+stack pointer and register base pointer to a member of a structure:
 
 ```c
 uthread_ctx ctx;              // create structure
 memset(&ctx, 0, sizeof(ctx)); // zero it out
   
 __asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
-         : "=r"(ctx.rsp)      // OutputOperands
+         "movq %%rbp, %1;"
+         : "=r"(ctx.rsp),     // OutputOperands
+           "=r"(ctx.rbp)
 	 :                    // InputOperands
 	 : "rsp");            // Clobbers
 ```
 
 If you are saving multiple registers, then it may be ideal to perform all of the
 necessary move operations in a single `__asm__` block (or even an `__asm__ volatile`
-block) in order to prevent the compiler from changing the relative order of 
-relevant instructions or from clobbering output operands in-between assembly blocks. 
+block), similar to what is presented above, in order to prevent the compiler from 
+changing the relative order of relevant instructions or from clobbering output 
+operands in-between assembly blocks. 
 
 ## How to Get the Skeleton Code
 
