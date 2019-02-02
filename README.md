@@ -56,15 +56,15 @@ download are listed near the top of the page [here](https://github.com/cs1730/cs
 
 Here is a table that briely outlines each file in the skeleton code:
 
-| File                   | Description                                                      |
-|------------------------|------------------------------------------------------------------|
-| `Doxyfile`             | Configuration file for `doxygen`.                                |
-| `Makefile`             | Configuration file for `make`.                                   |
-| `README.md`            | This project description.                                        |
-| `SUBMISSION.md`        | Student submission information.                                  |
-| `csx730_uthreads.c`    | Where you will put most of your thread implementation.           |
-| `csx730_uthreads.h`    | Thread structures, function prototypes, and macros.              |
-| `csx730_list_driver.c` | Where the `main` method lives for the  __[DRIVER]__ requirement. |
+| File                       | Description                                                      |
+|----------------------------|------------------------------------------------------------------|
+| `Doxyfile`                 | Configuration file for `doxygen`.                                |
+| `Makefile`                 | Configuration file for `make`.                                   |
+| `README.md`                | This project description.                                        |
+| `SUBMISSION.md`            | Student submission information.                                  |
+| `csx730_uthreads.c`        | Where you will put most of your thread implementation.           |
+| `csx730_uthreads.h`.       | Thread structures, function prototypes, and macros.              |
+| `csx730_uthreads_driver.c` | Where the `main` method lives for the  __[DRIVER]__ requirement. |
 
 If any updates to the project files are announced by your instructor, you can
 merge those changes into your copy by changing into your project directory
@@ -171,7 +171,7 @@ being subtracted from your point total. That is, they are all or nothing.
 ## Submission Instructions
 
 You will still be submitting your project via Nike. Make sure your project files
-are on <code>nike.cs.uga.edu</code>. Change into the parent directory of your
+are on `nike.cs.uga.edu`. Change into the parent directory of your
 project directory. If you've followed the instructions provided in earlier in this
 document, then the name of your project directory is likely `csx730-list`.
 While in your project parent directory, execute the following command: 
