@@ -32,13 +32,10 @@ Other project details are provided below.
 
 ```
 
-## Suggested Reading
-
-* [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
-
 ## Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
+* [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
 * [`getittimer(2)`, `setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 
 ## How to Get the Skeleton Code
