@@ -3,7 +3,7 @@
 > The fibers of all things have their tension and are strained like the strings of an instrument.
 > __--Henry David Thoreau__
 
-**DUE MON 2019-02-04 (Feb 4) @ 11:55 PM**
+**DUE MON 2019-02-19 (Feb 19) @ 11:55 PM**
 
 This repository contains the skeleton code for the `csx730-uthreads` project
 assigned to the students in the Spring 2019 CSCI 4730/6730 class
