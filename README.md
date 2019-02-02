@@ -51,7 +51,7 @@ Other project details are provided below.
 * [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
 * [C Typedef Declaration](https://en.cppreference.com/w/c/language/typedef)
 * [`mmap(2)`](http://man7.org/linux/man-pages/man2/mmap.2.html)
-* [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
+* [`setitimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 * [`sigprocmask(2)`](http://man7.org/linux/man-pages/man2/sigprocmask.2.html)
 
@@ -127,10 +127,19 @@ operands in-between assembly blocks.
 ## Where can I store Extra Information about a Thread?
 
 Each `uthread` has a member called `extra` that can point to any location the implementor
-desires. I would recommend creating a `struct` for your information, then placing it at
-the end of the thread's allocated stack space. Since users of the library get to decide
-what each thread's stack size is, it's recomended that you _increase_ the amount of memory
-allocated by the size of your structure so that the user's desired stack size is honored.
+desires. A convenient way to keep extra information organized would be to use a `struct`.
+A convenient place to store an object of this structure is it at the end of the thread's
+allocated stack space. Since users of the library get to decide what each thread's stack
+size is, it's recomended that you _increase_ the amount of memory allocated by the size of
+your structure so that the user's desired stack size is honored.
+
+## Planning it Out
+
+Upon creation of the first user-mode thread, the scheduler should be started and the
+thread added to its queue. This should also initiate an interval timer that sends a signal
+to the process. An interval of about 5,000 microseconds should suffice. The rest of
+the project boils down to careful _planning_. Drawing a state diagram before writing
+any code will help.
 
 ## How to Get the Skeleton Code
 
