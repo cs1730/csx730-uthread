@@ -5,8 +5,33 @@
 
 /**
  * @file
- * Testing...
+ * A thread of execution is the smallest sequence of programmed instructions that can be 
+ * managed independently by a scheduler. A <b>user-mode thread</b>, sometimes referred to
+ * as a <i>fiber</i>, is one that is scheduled in user mode instead of kernel mode. In user mode,
+ * only a single thread can execute at a time. After some time, the current thread that
+ * is executing will be temporarily interrupted by some signal, the disposition of which
+ * should trigger a context switch to another thread without requiring either thread's 
+ * cooperation. The basic idea is that these context switches should occur so quickly that
+ * all threads appear to execute concurrently. Special care should be taken to block 
+ * signals during a context switch. 
+ *
+ * <p>
+ * Each thread gets its own stack that is separate from the stack of the calling process
+ * but somewhere within the process's virtual memory space. While this new stack space
+ * can be allocated using @c malloc(3), use of @c mmap(2) is recommended as it guarantees
+ * the memory will be allocated at a nearby page boundary. You should 
+ * <a href="https://lwn.net/Articles/294001/">actively avoid</a> use of the @c MAP_GROWSDOWN
+ * flag when using @c mmap(2) for a stack. Instead simply treat the returned pointer to 
+ * the mapped area as the end of the stack, then add the stack size to compute the 
+ * initial stack pointer value.
+ *
+ * <p>
+ * The @c _CS670_SOURCE feature test macro defines additional functions for user-mode threads.
  */
+
+//------------------------------------------------------------------------------------------------//
+// DEFINES                                                                                        //
+//------------------------------------------------------------------------------------------------//
 
 /** Minimum size for user-mode thread stack. */
 #define UTHREAD_MIN_STACK_SIZE 131072
@@ -14,16 +39,28 @@
 /** Default size for user-mode thread stack. */
 #define UTHREAD_STACK_SIZE 4194304
 
+//------------------------------------------------------------------------------------------------//
+// TYPEDEFS                                                                                       //
+//------------------------------------------------------------------------------------------------//
+
 /** User-mode thread start function argument type. */
 typedef void * uthread_arg;
 
 /** User-mode thread start function type. */
 typedef void uthread_func(uthread_arg);
 
-typedef enum { NEW,      /**< new */
-	       RUNNING,
-	       WAITING,
-	       DONE
+//------------------------------------------------------------------------------------------------//
+// DATA STRUCTURES & ENUMERATIONS                                                                 //
+//------------------------------------------------------------------------------------------------//
+
+/**
+ * Represents a user-mode thread state. 
+ */
+typedef enum {
+  NEW,     /**< A thread that has not yet started is in this state. */
+  RUNNING, /**< A thread that is executing is this state. */
+  WAITING, /**< A thread that is has been preempted is in this state. */
+  DONE     /**< A thread that has exited is in this state. */
 } uthread_state;
 
 /** 
@@ -52,10 +89,28 @@ typedef struct {
   // YOU MAY ADD ADDITIONAL REGISTERS BELOW THIS COMMENT
 } uthread_ctx;
 
+/** 
+ * Holds the metadata for a user-mode thread.
+ */
 typedef struct {
-  uthread_state state;
-  uthread_stack stack;
+  uthread_state state;    /**< thread state */
+  uthread_stack stack;    /**< thread stack */
+  uthread_ctx   ctx;      /**< thread context */
+  unsigned long priority; /**< thread priority */
 } uthread;
+
+//------------------------------------------------------------------------------------------------//
+// FUNCTION PROTOTYPES                                                                            //
+//------------------------------------------------------------------------------------------------//
+
+/**
+ * Clears out all of the metadata for the thread. Formally, this function fills the first 
+ * @c sizeof(uthread) bytes of the memory area pointed to by @c thread with the constant byte 
+ * @c NULL.
+ *
+ * @param thread     pointer to user-mode thread
+ */
+void uthread_clear(uthread * thread);
 
 /**
  * Initializes and runs a user-mode thread within the calling process. The new thread starts in the
@@ -81,19 +136,37 @@ typedef struct {
 int uthread_create(uthread * thread, uthread_func * func, uthread_arg arg, size_t stack_size);
 
 /**
- *
+ * Terminates the calling user-mode thread. When a thread terminates, process-shared resources 
+ * (e.g., mutexes, condition variables, semaphores, and file descriptors) are not released, and 
+ * functions registered using @c atexit(3) are not called. The thread's state should be
+ * @c DONE once terminated, regardless of whether the termination was the result of calling
+ * this function.
  */
-void uthread_exit(void * status);
+void uthread_exit(void);
 
-void uthread_join(uthread * thread, void ** status);
+/**
+ * Waits for the user-mode thread specified by @p thread to terminate. If that thread has already 
+ * terminated, then this function returns immediately. While the thread is waiting, its state should
+ * be @c WAITING.
+ *
+ * @param thread     pointer to user-mode thread
+ */
+void uthread_join(uthread * thread);
 
+/**
+ * Returns a pointer to the user-mode thread structure of the calling thread.
+ *
+ * @return a pointer to the user-mode thread structure of the calling thread
+ */
 uthread * uthread_self(void);
 
-
-
-#ifdef _CS6730_UTHREAD_PRIORITY
+//------------------------------------------------------------------------------------------------//
+// _CS6730_SOURCE FEATURES
+//------------------------------------------------------------------------------------------------//
+#ifdef _CS6730_SOURCE
 #include "csx730_uthread_priority.h"
-#endif
+
+#endif // _CS6730_SOURCE
 
 #endif // CSX730_UTHREAD_H
 
