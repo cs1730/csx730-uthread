@@ -44,7 +44,7 @@ In this project, you are tasked with implementing a preemptive multitasking, use
 thread library in C and a little bit of x86 assembly! Some starter code is provided. 
 Other project details are provided below.
 
-## Useful References
+### Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
 * [X86 64 Register and Instruction Quick Start](https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start)
@@ -54,7 +54,7 @@ Other project details are provided below.
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 
-## How to Change the Stack Pointer
+### How to Change the Stack Pointer
 
 You can easily move the stack pointer using 
 [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
@@ -79,7 +79,7 @@ in-between assembly blocks. If the function you intend to run on
 the new stack requires arguments, then you may also need to manually move the 
 values into the argument registers before changing the stack pointer. 
 
-## How to Implement the Context Switch
+### How to Implement the Context Switch
 
 Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
 this too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
@@ -101,7 +101,7 @@ they are registers that called routines are expected to preserve:
 | `r15`    | register 15            |
 
 This is not an exhaustive list! You may find that saving additional registers is needed.
-Creating a `struct` type, perhaps called `uthread_ctx`, to hold these registers is 
+Creating a `typedef struct`, perhaps called `uthread_ctx`, to hold these registers is 
 recommended. Here is an example of how to save the register stack pointer to a member
 of a structure:
 
