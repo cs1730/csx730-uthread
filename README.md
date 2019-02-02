@@ -82,7 +82,8 @@ values into the argument registers before changing the stack pointer.
 Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
 this too can be done using an `__asm__` block. To simulate `setjmp(3)`, save
 the values of the relevant registers. To simulate `longjmp(3)`, restore the register 
-values, then return the previously saved environment. 
+values, then return to the previously saved environment by setting the stack pointer
+and manually returning. 
 
 ## How to Get the Skeleton Code
 
