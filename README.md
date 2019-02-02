@@ -81,8 +81,8 @@ values into the argument registers before changing the stack pointer.
 
 ## How to Implement the Context Switch
 
-Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
-this too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
+Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry!
+This too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
 block with GCC. To simulate `setjmp(3)`, save the values of the relevant registers. 
 To simulate `longjmp(3)`, restore the register values, then return to the previously 
 saved environment by setting the stack pointer and manually returning. 
