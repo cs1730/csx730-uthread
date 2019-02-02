@@ -1,6 +1,7 @@
 # csx730-uthreads
 
-![Threads](https://imgur.com/9De5IEG.jpg)
+> The fibers of all things have their tension and are strained like the strings of an instrument.
+> __--Henry David Thoreau__
 
 **DUE MON 2019-02-04 (Feb 4) @ 11:55 PM**
 
