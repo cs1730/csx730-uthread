@@ -43,6 +43,20 @@
 // TYPEDEFS                                                                                       //
 //------------------------------------------------------------------------------------------------//
 
+/** 
+ * The implementation-defined unsigned integer type of the result of @c sizeof. A @c size_t can 
+ * store the maximum size of a theoretically possible object of any type (including array). We 
+ * define it here so that @c <stddef.h> does not need to be included.
+ *
+ * <p>
+ * The exact type provided here was chosen to match the @c gcc implementation on UGA's Nike server.
+ * You should be able to verify using:
+ * @code
+ * $ echo | gcc -E -xc -include 'stddef.h' - | grep size_t
+ * @endcode
+ */
+typedef long unsigned int size_t;
+
 /** User-mode thread start function argument type. */
 typedef void * uthread_arg;
 
@@ -64,7 +78,7 @@ typedef enum {
 } uthread_state;
 
 /** 
- * Holds the metadata for a stack. On most systems, we assume that @start is the lowest address
+ * Holds the metadata for a stack. On most systems, we assume that @c start is the lowest address
  * in the allocated stack space (e.g., returned by @c malloc(3) or @c mmap(2)), and that
  * @c rsp is the highest address in the space.  
  */
