@@ -30,7 +30,7 @@ structure for thread information is provided. Other project details are provided
 
 * [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
 
-## Useful Reference
+## Useful References
 
 * [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
 
