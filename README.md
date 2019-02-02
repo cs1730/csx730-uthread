@@ -135,7 +135,7 @@ your structure so that the user's desired stack size is honored.
 
 ## Planning it Out
 
-Upon creation of the first user-mode thread, the scheduler should be started and the
+Upon creation of the first user-mode thread, the scheduler should be start and the
 thread added to its queue. This should also initiate an interval timer that sends a signal
 to the process. An interval of about 5,000 microseconds should suffice. The rest of
 the project boils down to careful _planning_. Drawing a state diagram before writing
