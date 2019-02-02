@@ -104,13 +104,15 @@ typedef struct {
 } uthread_ctx;
 
 /** 
- * Holds the metadata for a user-mode thread.
+ * Holds the metadata for a user-mode thread. Implementers should feel free to use @p extra to point
+ * to any implementation-dependent extra information they might need to properly implement the
+ * library's functions.
  */
 typedef struct {
   uthread_state state;    /**< thread state */
   uthread_stack stack;    /**< thread stack */
   uthread_ctx   ctx;      /**< thread context */
-  uthread *     join;     /**< thread to join */
+  void *        extra;    /**< extra information; implementation-dependent */
   unsigned long priority; /**< thread priority */
 } uthread;
 
