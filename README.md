@@ -35,9 +35,9 @@ but somewhere within the process's virtual memory space. While this new stack sp
 can be allocated using `malloc(3)`, use of `mmap(2)` is recommended as it guarantees
 the memory will be allocated at a nearby page boundary. You should 
 [actively avoid](https://lwn.net/Articles/294001/) use of the `MAP_GROWSDOWN` 
-flag when using `mmap`. If you are allocating memory for a stack using `mmap(2)`, 
-then simply treat the returned pointer to the mapped area as the end of the stack, 
-then add the stack size to compute the initial stack pointer value.
+flag when using `mmap(2)` for a stack. Instead simply treat the returned pointer to 
+the mapped area as the end of the stack, then add the stack size to compute the 
+initial stack pointer value.
 
 In this project, you are tasked with implementing a preemptive multitasking, user-mode 
 thread library in C and a little bit of x86 assembly! Some starter code is provided. 
