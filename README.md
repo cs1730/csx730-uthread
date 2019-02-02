@@ -198,7 +198,7 @@ for students enrolled in CSCI 6730 and a functional requirement for students enr
 CSCI 4730. This effectively provides an extra credit opportunity to the undergraduate
 students and a non-compliance penalty for the graduate students.
 
-1. __(10 points) [PRIORITY] Implement `_CS6730_SOURCE` features`__
+1. __(10 points) [PRIORITY] Implement `_CS6730_SOURCE` features__
    The `_CS6730_SOURCE` feature test macro should enable the following set of features:
    
    * Individual thread priority.
