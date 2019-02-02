@@ -124,6 +124,14 @@ block), similar to what is presented above, in order to prevent the compiler fro
 changing the relative order of relevant instructions or from clobbering output 
 operands in-between assembly blocks. 
 
+## Where can I store Extra Information about a Thread?
+
+Each `uthread` has a member called `extra` that can point to any location the implementor
+desires. I would recommend creating a `struct` for your information, then placing it at
+the end of the thread's allocated stack space. Since users of the library get to decide
+what each thread's stack size is, it's recomended that you _increase_ the amount of memory
+allocated by the size of your structure so that the user's desired stack size is honored.
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
