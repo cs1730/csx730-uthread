@@ -26,6 +26,14 @@ MOTIVATE
 In this project, you are tasked with implementing user space threads! The
 structure for thread information is provided. Other project details are provided below.
 
+## Suggested Reading
+
+* [GCC: How to Use Inline Assembly Language in C Code](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
+
+## Useful Reference
+
+* [X86 Opcode and Instruction Reference](http://ref.x86asm.net)
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
