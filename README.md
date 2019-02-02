@@ -82,10 +82,10 @@ values into the argument registers before changing the stack pointer.
 ## How to Implement the Context Switch
 
 Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Not to worry,
-this too can be done using an `__asm__` block. To simulate `setjmp(3)`, save
-the values of the relevant registers. To simulate `longjmp(3)`, restore the register 
-values, then return to the previously saved environment by setting the stack pointer
-and manually returning. 
+this too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
+block with GCC. To simulate `setjmp(3)`, save the values of the relevant registers. 
+To simulate `longjmp(3)`, restore the register values, then return to the previously 
+saved environment by setting the stack pointer and manually returning. 
 
 At a minimum, the following 64 bit registers should be saved on an `x86` machine, as
 they are registers that called routines are expected to preserve:
@@ -100,6 +100,7 @@ they are registers that called routines are expected to preserve:
 | `r14`    | register 14            |
 | `r15`    | register 15            |
 
+This is not an exhaustive list! You may find that saving additional registers is needed.
 Creating a `struct` type, perhaps called `uthread_ctx`, to hold these registers is 
 recommended. Here is an example of how to save the register stack pointer to a member
 of a structure:
