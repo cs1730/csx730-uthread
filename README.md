@@ -1,4 +1,4 @@
-# csx730-uthreads
+# csx730-uthread
 
 > The fibers of all things have their tension and are strained like the strings of an instrument.
 > __--Henry David Thoreau__
@@ -123,27 +123,27 @@ relevant instructions or from clobbering output operands in-between assembly blo
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
-files into sub-directory within your present working directory:
+files into a subdirectory within your present working directory:
 
 ```
-$ git clone https://github.com/cs1730/csx730-uthreads.git
+$ git clone https://github.com/cs1730/csx730-uthread.git
 ```
 
-This should create a directory called `csx730-uthreads` in your present working directory that
+This should create a directory called `csx730-uthread` in your present working directory that
 contains the project files. For this project, the only files that are included with the project
-download are listed near the top of the page [here](https://github.com/cs1730/csx730-uthreads).
+download are listed near the top of the page [here](https://github.com/cs1730/csx730-uthread).
 
 Here is a table that briely outlines each file in the skeleton code:
 
-| File                       | Description                                                      |
-|----------------------------|------------------------------------------------------------------|
-| `Doxyfile`                 | Configuration file for `doxygen`.                                |
-| `Makefile`                 | Configuration file for `make`.                                   |
-| `README.md`                | This project description.                                        |
-| `SUBMISSION.md`            | Student submission information.                                  |
-| `csx730_uthreads.c`        | Where you will put most of your thread implementation.           |
-| `csx730_uthreads.h`.       | Thread structures, function prototypes, and macros.              |
-| `csx730_uthreads_driver.c` | Where the `main` method lives for the  __[DRIVER]__ requirement. |
+| File                      | Description                                                      |
+|---------------------------|------------------------------------------------------------------|
+| `Doxyfile`                | Configuration file for `doxygen`.                                |
+| `Makefile`                | Configuration file for `make`.                                   |
+| `README.md`               | This project description.                                        |
+| `SUBMISSION.md`           | Student submission information.                                  |
+| `csx730_uthread.c`        | Where you will put most of your thread implementation.           |
+| `csx730_uthread.h`.       | Thread structures, function prototypes, and macros.              |
+| `csx730_uthread_driver.c` | Where the `main` method lives for the  __[DRIVER]__ requirement. |
 
 If any updates to the project files are announced by your instructor, you can
 merge those changes into your copy by changing into your project directory
@@ -189,7 +189,7 @@ for students enrolled in CSCI 6730 and a functional requirement for students enr
 CSCI 4730. This effectively provides an extra credit opportunity to the undergraduate
 students and a non-compliance penalty for the graduate students.
 
-1. __(10 points) [PRIORITY] Implement `csx730_uthreads_priority.h` functions in `csx730_uthreads_priority.c`__
+1. __(10 points) [PRIORITY] Implement `csx730_uthread_priority.h` functions in `csx730_uthread_priority.c`__
    Each of the functions whose prototype appears in the header must
    be implemented correctly in the corresponding `.c` file. This implements
    the `_CS6730_UTHREAD_PRIORITY` set of features:
@@ -274,7 +274,7 @@ document, then the name of your project directory is likely `csx730-list`.
 While in your project parent directory, execute the following command: 
 
 ```
-$ submit csx730-uthreads csx730
+$ submit csx730-uthread csx730
 ```
 
 If you have any problems submitting your project then please make a private Piazza
