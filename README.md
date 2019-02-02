@@ -74,7 +74,8 @@ some_func();
 Please note that in some cases it may be favorable to move the actual function
 call into the `__asm__` block (or even an `__asm__ volatile` block), e.g., using
 the `callq` instruction, in order to prevent the compiler from changing the
-relative order of relevant instructions. If the function you intend to run on
+relative order of relevant instructions or from clobbering output operands 
+in-between assembly blocks. If the function you intend to run on
 the new stack requires arguments, then you may also need to manually move the 
 values into the argument registers before changing the stack pointer. 
 
@@ -99,7 +100,7 @@ they are registers that called routines are expected to preserve:
 | `r14`    | register 14            |
 | `r15`    | register 15            |
 
-Creating a `struct` type, perhaps called `uthread_ctx`, to hold these regsiters is 
+Creating a `struct` type, perhaps called `uthread_ctx`, to hold these registers is 
 recommended. Here is an example of how to save the register stack pointer to a member
 of a structure:
 
@@ -112,6 +113,11 @@ __asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
 	 :                    // InputOperands
 	 : "rsp");            // Clobbers
 ```
+
+If you are saving multiple registers, then it may be ideal to perform all of the
+necessary move operations in a single `__asm__` block (or even an `__asm__ volatile`
+block) in order to prevent the compiler from changing the relative order of 
+relevant instructions or from clobbering output operands in-between assembly blocks. 
 
 ## How to Get the Skeleton Code
 
