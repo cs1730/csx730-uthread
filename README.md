@@ -102,15 +102,17 @@ they are registers that called routines are expected to preserve:
 
 This is not an exhaustive list! You may find that saving additional registers is needed.
 Creating a `typedef struct`, perhaps called `uthread_ctx`, to hold these registers is 
-recommended. Here is an example of how to save the register stack pointer to a member
-of a structure:
+recommended. Here is an example of how to save the register stack pointer and register
+base pointer to a member of a structure:
 
 ```c
 uthread_ctx ctx;              // create structure
 memset(&ctx, 0, sizeof(ctx)); // zero it out
   
 __asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
-         : "=r"(ctx.rsp)      // OutputOperands
+         "movq %%rbp, %1;"
+         : "=r"(ctx.rsp),     // OutputOperands
+           "=r"(ctx.rbp)
 	 :                    // InputOperands
 	 : "rsp");            // Clobbers
 ```
