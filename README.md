@@ -23,9 +23,16 @@ notice and licensing information at the bottom of this document.
 
 A thread of execution is the smallest sequence of programmed instructions that can be 
 managed independently by a scheduler. A __user-mode thread__, sometimes referred to as a
-_fiber_, is one that is scheduled in user mode instead of kernel mode. In this project, 
-you are tasked with implementing a preemptive multitasking, user-mode thread library 
-in C and a little bit of x86 assembly! Some starter code is provided. 
+_fiber_, is one that is scheduled in user mode instead of kernel mode. 
+
+Each thread gets its own stack that is separate from the stack of the calling process
+but somewhere within the process's virtual memory space. While this new stack space
+can be allocated using `malloc(2)`, use of `mmap(2)` is recommended as it guarantees
+the memory will be allocated at a nearby page boundary. 
+
+
+In this project, you are tasked with implementing a preemptive multitasking, user-mode 
+thread library in C and a little bit of x86 assembly! Some starter code is provided. 
 Other project details are provided below.
 
 ```
@@ -40,6 +47,13 @@ Other project details are provided below.
 * [`mmap(2)`](http://man7.org/linux/man-pages/man2/mmap.2.html)
 * [`setittimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
+
+## Note about `mmap` and `MAP_GROWSDOWN`
+
+You should [actively avoid](https://lwn.net/Articles/294001/) use of the `MAP_GROWSDOWN` 
+flag when using `mmap`. If you are allocating memory for a stack, simply treat the
+pointer to the mapped area as the end of the stack, then add the stack size to compute
+the initial stack pointer value.
 
 ## How to Get the Skeleton Code
 
