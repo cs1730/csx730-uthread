@@ -100,7 +100,18 @@ they are registers that called routines are expected to preserve:
 | `r15`    | register 15            |
 
 Creating a `struct` type, perhaps called `uthread_ctx`, to hold these regsiters is 
-recommended.
+recommended. Here is an example of how to save the register stack pointer to a member
+of a structure:
+
+```c
+uthread_ctx ctx;              // create structure
+memset(&ctx, 0, sizeof(ctx)); // zero it out
+  
+__asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
+         : "=r"(ctx.rsp)      // OutputOperands
+	 :                    // InputOperands
+	 : "rsp");            // Clobbers
+```
 
 ## How to Get the Skeleton Code
 
