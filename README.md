@@ -101,9 +101,9 @@ they are registers that called routines are expected to preserve:
 | `r15`    | register 15            |
 
 This is not an exhaustive list! You may find that saving additional registers is needed.
-A `typedef struct` called `uthread_ctx` is provided. You may add additional registers
-to the structure if you find it necesary. Here is an example of how to save the register 
-stack pointer and register base pointer to a member of a structure:
+A `typedef struct` called `uthread_ctx` is provided with the starter code. You may add
+additional registers to the structure if you find it necesary. Here is an example of how to
+save the register stack pointer and register base pointer to a member of a structure:
 
 ```c
 uthread_ctx ctx;              // create structure
