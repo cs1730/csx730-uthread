@@ -99,6 +99,9 @@ they are registers that called routines are expected to preserve:
 | `r14`    | register 14            |
 | `r15`    | register 15            |
 
+Creating a `struct` type, perhaps called `uthread_ctx`, to hold these regsiters is 
+recommended.
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
