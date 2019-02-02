@@ -28,7 +28,8 @@ only a single thread can execute at a time. After some time, the current thread 
 is executing will be temporarily interrupted by some signal, the disposition of which
 should trigger a context switch to another thread without requiring either thread's 
 cooperation. The basic idea is that these context switches should occur so quickly that
-all threads appear to execute concurrently.
+all threads appear to execute concurrently. Special care should be taken to block 
+signals during a context switch. 
 
 Each thread gets its own stack that is separate from the stack of the calling process
 but somewhere within the process's virtual memory space. While this new stack space
