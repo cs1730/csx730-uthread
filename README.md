@@ -203,7 +203,7 @@ students and a non-compliance penalty for the graduate students.
    Students are expected to implement a priority queue using a max heap to satisfy the
    scheduling requirement.
    
-1. __(10 points) [SETJMP] Implement the context switch without using `setjmp(3)` and `longjmp(3)`.
+1. __(10 points) [SETJMP] Implement the context switch without using `setjmp(3)` and `longjmp(3)`.__
    Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry! You
    simply need to write the assembly to save and restore the CPU registers. While this could
    be done using an `__asm__` block, it's a lot cleaner to just write a dedicated `.s` file
