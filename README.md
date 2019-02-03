@@ -82,47 +82,7 @@ values into the argument registers before changing the stack pointer.
 
 ## How to Implement the Context Switch
 
-Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry!
-This too can be done using an [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
-block with GCC. To simulate `setjmp(3)`, save the values of the relevant registers. 
-To simulate `longjmp(3)`, restore the register values, then return to the previously 
-saved environment by setting the stack pointer and manually returning. 
-
-At a minimum, the following 64 bit registers should be saved on an `x86` machine, as
-they are registers that called routines are expected to preserve:
-
-| Register | Description            |
-|----------|------------------------|
-| `rsp`    | register stack pointer |
-| `rbp`    | register base pointer  |
-| `rbx`    | register b extended    |
-| `r12`    | register 12            |
-| `r13`    | register 13            |
-| `r14`    | register 14            |
-| `r15`    | register 15            |
-
-This is not an exhaustive list! You may find that saving additional registers is needed.
-A `typedef struct` called `uthread_ctx` is provided with the starter code. You may add
-additional registers to the structure if you find it necesary. Here is an example of how to
-save the register stack pointer and register base pointer to a member of a structure:
-
-```c
-uthread_ctx ctx;              // create structure
-memset(&ctx, 0, sizeof(ctx)); // zero it out
-  
-__asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
-         "movq %%rbp, %1;"
-         : "=r"(ctx.rsp),     // OutputOperands
-           "=r"(ctx.rbp)
-	 :                    // InputOperands
-	 : "rsp");            // Clobbers
-```
-
-If you are saving multiple registers, then it may be ideal to perform all of the
-necessary move operations in a single `__asm__` block (or even an `__asm__ volatile`
-block), similar to what is presented above, in order to prevent the compiler from 
-changing the relative order of relevant instructions or from clobbering output 
-operands in-between assembly blocks. 
+Y 
 
 ## Where can I store Extra Information about a Thread?
 
@@ -216,7 +176,7 @@ for students enrolled in CSCI 6730 and a functional requirement for students enr
 CSCI 4730. This effectively provides an extra credit opportunity to the undergraduate
 students and a non-compliance penalty for the graduate students.
 
-1. __(10 points) [PRIORITY] Implement `_CS6730_SOURCE` features__
+1. __(5 points) [PRIORITY] Implement `_CS6730_SOURCE` features__
    The `_CS6730_SOURCE` feature test macro should enable the following set of features:
    
    * Individual thread priority.
@@ -227,6 +187,58 @@ students and a non-compliance penalty for the graduate students.
    function to default user-mode thread's priority to `UTHREAD_PRIORITY_NORMAL`.
    Students are expected to implement a priority queue using a max heap to satisfy the
    scheduling requirement.
+   
+1. __(5 points) [SETJMP] Implement the context switch wouthout using `setjmp(3)` and `longjmp(3)`.
+   Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry!
+   You have two options here:
+   
+   * Use [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
+   block with GCC
+   
+   This too can be done using an . To simulate `setjmp(3)`, save the values of the relevant registers. 
+   To simulate `longjmp(3)`, restore the register values, then return to the previously 
+   saved environment by setting the stack pointer and manually returning. 
+
+   At a minimum, the following 64 bit registers should be saved on an `x86` machine, as
+   they are registers that called routines are expected to preserve:
+   
+   | Register | Description            |
+   |----------|------------------------|
+   | `rsp`    | register stack pointer |
+   | `rbp`    | register base pointer  |
+   | `rbx`    | register b extended    |
+   | `r12`    | register 12            |
+   | `r13`    | register 13            |
+   | `r14`    | register 14            |
+   | `r15`    | register 15            |
+
+   This is not an exhaustive list! You may find that saving additional registers is needed.
+   A `typedef struct` called `uthread_ctx` is provided with the starter code. You may add
+   additional registers to the structure if you find it necesary. Here is an example of how to
+   save the register stack pointer and register base pointer to a member of a structure:
+
+   ```c
+   uthread_ctx ctx;              // create structure
+   memset(&ctx, 0, sizeof(ctx)); // zero it out
+  
+   __asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
+            "movq %%rbp, %1;"
+            : "=r"(ctx.rsp),     // OutputOperands
+              "=r"(ctx.rbp)
+            :                    // InputOperands
+            : "rsp");            // Clobbers
+   ```
+
+    If you are saving multiple registers, then it may be ideal to perform all of the
+    necessary move operations in a single `__asm__` block (or even an `__asm__ volatile`
+    block), similar to what is presented above, in order to prevent the compiler from 
+    changing the relative order of relevant instructions or from clobbering output 
+    operands in-between assembly blocks. If you still have trouble, then manually writing
+    an assembly file (`uthread_setjmp.s`) :
+    
+    
+    If you take this route, then you will need to use the alternative makefile so that
+    the source assembly gets assembled and linke appropriately. 
 
 ### Non-Functional Requirements
 
