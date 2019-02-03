@@ -9,7 +9,10 @@
 _uthread_save:
 
 	xorq    %rax, %rax
-
+	leaveq
+	retq
+	pop    %rbp
+	
 /*------------------------------------------------------------------------------------------------*/
 	.text
 	.globl   _uthread_restore
@@ -20,3 +23,7 @@ _uthread_save:
 _uthread_restore:
 	
 	xorq    %rax, %rax
+	leaveq
+	retq
+	pop    %rbp
+	
