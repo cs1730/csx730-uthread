@@ -19,13 +19,16 @@ csx730_uthread_driver.s: csx730_uthread_driver.c csx730_uthread.h
 csx730_uthread.o: csx730_uthread.s
 	$(AS) -o $@ $<
 
-csx730_uthread.s: csx730_uthread.c csx730_uthread.h
+csx730_uthread.s: csx730_uthread.c csx730_uthread.h csx730_uthread_setjmp.h
 	$(CC) $(CFLAGS) -S $<
+
+csx730_uthread_setjmp.o: csx730_uthread_setjmp.s
+	$(AS) -o $@ $<
 
 test: csx730_uthread_tester
 	./csx730_uthread_tester
 
-csx730_uthread_tester: csx730_uthread_tester.o csx730_uthread.o
+csx730_uthread_tester: csx730_uthread_tester.o csx730_uthread.o csx730_uthread_setjmp.o
 	$(CC) -o csx730_uthread_tester $^
 
 csx730_uthread_tester.o: csx730_uthread_tester.s

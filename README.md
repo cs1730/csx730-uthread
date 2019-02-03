@@ -54,6 +54,8 @@ Other project details are provided below.
 * [`setitimer(2)`](http://man7.org/linux/man-pages/man2/getitimer.2.html)
 * [`sigaction(2)`](http://man7.org/linux/man-pages/man2/sigaction.2.html)
 * [`sigprocmask(2)`](http://man7.org/linux/man-pages/man2/sigprocmask.2.html)
+* [`setjmp(3)`](http://man7.org/linux/man-pages/man3/setjmp.3.html)
+* [`longjmp(3)`](http://man7.org/linux/man-pages/man3/longjmp.3.html)
 
 ## How to Change the Stack Pointer
 
@@ -82,7 +84,19 @@ values into the argument registers before changing the stack pointer.
 
 ## How to Implement the Context Switch
 
-Y 
+Unless you want/need to fulfill the **[SETJMP]** requirement, you may directly
+use `setjmp(3)` to save the excution context into a buffer and `longjmp(3)`
+to restore the execution context. The documentation for these functions may be
+hard to parse, but essentially `setjmp(3)` saves a copy of the neccesary CPU
+registers into a buffer, then directly returns `0`. Later, when `longjmp(3)`
+is executed with the buffer and some value, the registeres in the buffer get
+restored, a (presumably) lon-local jump (e.g., the x86 `jumpq` instruction) is
+performed and execution continues as if the corresponding call to `setjmp(3)`
+has just returned wit the supplied value.
+
+You may recall that the return value `fork(2)` can be used to determine if execution is occuring
+in the parent process or the child process. Similarly, the return value of `setjmp(3)` can be used
+to determine if the execution context has just been saved or restored. 
 
 ## Where can I store Extra Information about a Thread?
 
@@ -123,7 +137,8 @@ Here is a table that briely outlines each file in the skeleton code:
 | `README.md`               | This project description.                                        |
 | `SUBMISSION.md`           | Student submission information.                                  |
 | `csx730_uthread.c`        | Where you will put most of your thread implementation.           |
-| `csx730_uthread.h`.       | Thread structures, function prototypes, and macros.              |
+| `csx730_uthread.h`        | Thread structures, function prototypes, and macros.              |
+| `setjmp/`                 | Subdirectory containing files for the **[SETJMP]** requirement.  |
 
 If any updates to the project files are announced by your instructor, you can
 merge those changes into your copy by changing into your project directory
@@ -139,7 +154,7 @@ your instructor via Piazza.
 ## Project Requirements
 
 This assignment is worth 100 points. The lowest possible grade is 0, and the 
-highest possible grade is 110 (if you are enrolled in CSCI 4730).
+highest possible grade is 115 (if you are enrolled in CSCI 4730).
 
 ### Functional Requirements
 
@@ -188,14 +203,26 @@ students and a non-compliance penalty for the graduate students.
    Students are expected to implement a priority queue using a max heap to satisfy the
    scheduling requirement.
    
-1. __(5 points) [SETJMP] Implement the context switch wouthout using `setjmp(3)` and `longjmp(3)`.
-   Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry!
-   You have two options here:
-   
-   * Use [Extended ASM](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Extended-Asm) 
-   block with GCC
-   
-   This too can be done using an . To simulate `setjmp(3)`, save the values of the relevant registers. 
+1. __(10 points) [SETJMP] Implement the context switch without using `setjmp(3)` and `longjmp(3)`.
+   Without `setjmp(3)` and `longjmp(3)`, this task may seem daunting. Don't worry! You
+   simply need to write the assembly to save and restore the CPU registers. While this could
+   be done using an `__asm__` block, it's a lot cleaner to just write a dedicated `.s` file
+   containing the necesary assembly. You will need to do the following for this requirement:
+
+   * Move the files in the `setjmp` directory directly into the `csx730-uthread` directory.
+   * Inspect and read `csx730_uthread_setjmp.h`.
+   * Implement `_uthread_save` and `_uthread_restore` in `csx730_uthread_setjmp.s`.
+   * In `csx730_uthread.c`, replace all instances of `setjmp(3)` with `_uthread_save` and
+      all instances of `longjmp(3)` with `_uthread_restore`.
+   * Use the alternative makefile:
+
+     ```
+     $ make -f Makefile-setjmp
+     ```
+
+   While you could combine C and assembly, as was seen in how to change the stack pointer, this
+   requirement forces you to write the assembly directly in a `.s` file.   
+   To simulate `setjmp(3)`, save the values of the relevant registers. 
    To simulate `longjmp(3)`, restore the register values, then return to the previously 
    saved environment by setting the stack pointer and manually returning. 
 
@@ -214,31 +241,7 @@ students and a non-compliance penalty for the graduate students.
 
    This is not an exhaustive list! You may find that saving additional registers is needed.
    A `typedef struct` called `uthread_ctx` is provided with the starter code. You may add
-   additional registers to the structure if you find it necesary. Here is an example of how to
-   save the register stack pointer and register base pointer to a member of a structure:
-
-   ```c
-   uthread_ctx ctx;              // create structure
-   memset(&ctx, 0, sizeof(ctx)); // zero it out
-  
-   __asm__ ("movq %%rsp, %0;"    // AssemblerTemplate
-            "movq %%rbp, %1;"
-            : "=r"(ctx.rsp),     // OutputOperands
-              "=r"(ctx.rbp)
-            :                    // InputOperands
-            : "rsp");            // Clobbers
-   ```
-
-    If you are saving multiple registers, then it may be ideal to perform all of the
-    necessary move operations in a single `__asm__` block (or even an `__asm__ volatile`
-    block), similar to what is presented above, in order to prevent the compiler from 
-    changing the relative order of relevant instructions or from clobbering output 
-    operands in-between assembly blocks. If you still have trouble, then manually writing
-    an assembly file (`uthread_setjmp.s`) :
-    
-    
-    If you take this route, then you will need to use the alternative makefile so that
-    the source assembly gets assembled and linke appropriately. 
+   additional registers to the structure if you find it necesary. 
 
 ### Non-Functional Requirements
 
@@ -262,9 +265,7 @@ being subtracted from your point total. That is, they are all or nothing.
    the C standard library is provided [here](https://en.cppreference.com/w/c).
    No other libraries are permitted, especially `pthreads`. You are also **NOT**
    allowed to use any of the following: 
-   * `setjmp(3)`, 
    * `sigsetjmp(3)`, 
-   * `longjmp(3)`, 
    * `siglongjmp(3)`,
    * `getcontext(2)`, 
    * `setcontext(2)`, 
