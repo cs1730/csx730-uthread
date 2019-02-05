@@ -117,7 +117,8 @@ any code will help.
 
 You may find it useful to assign a thread for the calling process. This "main" thread does
 not need its own stack since it's supposed to represent the main execution of the process
-itself. This makes is convenient 
+itself. This is just a suggestion--it's not a requirement, but it may simply some of your
+scheduling logic simpler.
 
 ## How to Get the Skeleton Code
 
