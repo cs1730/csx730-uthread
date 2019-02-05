@@ -120,6 +120,12 @@ not need its own stack since it's supposed to represent the main execution of th
 itself. This is just a suggestion--it's not a requirement, but it may simply some of your
 scheduling logic simpler.
 
+The interface for the functions in this project is intentionally similar to the one
+provided by `pthreads`. To test your project, you might first try some simple programs 
+that use `pthreads`, then try the same program using your project functions instead.
+Don't try to overcomplicate it. We really just want to make sure that you can give the
+illusion of parallelism via repeated user-mode context switches. 
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
