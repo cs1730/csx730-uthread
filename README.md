@@ -115,6 +115,10 @@ to the process. An interval of about 5,000 microseconds should suffice. The rest
 the project boils down to careful _planning_. Drawing a state diagram before writing
 any code will help.
 
+You may find it useful to assign a thread for the calling process. This "main" thread does
+not need its own stack since it's supposed to represent the main execution of the process
+itself. This makes is convenient 
+
 ## How to Get the Skeleton Code
 
 On Nike, execute the following terminal command in order to download the project
