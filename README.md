@@ -166,14 +166,18 @@ The actual functionality is tested using test cases.
 1. __(100 points) Implement `csx730_uthread.h` functions in `csx730_uthread.c`.__
    Each of the functions whose prototype appears in the header and does not require
    the `_CS6760_SOURCE` feature test macro must  be implemented correctly in the
-   corresponding `.c` file. Here is a list of the functions:
+   corresponding `.c` file. Here is a list of the functions forming the public API:
 
    * __(10 points)__ `void uthread_clear(uthread *);`
    * __(20 points)__ `int uthread_create(uthread *, uthread_func *, uthread_arg, size_t);`
    * __(20 points)__ `void uthread_exit(void);`
    * __(20 points)__ `void uthread_join(uthread *);`
    * __(10 points)__ `uthread * uthread_self(void);`
-   * __(20 points)__ `void _uthread_schedule(void);`
+
+   Here is a list of functions forming the (private) scheduler API:
+   
+   * __(10 points)__ `void _uthread_sched_enqueue(uthread *);`
+   * __(10 points)__ `uthread * _uthread_sched_dequeue(void);`
 
    The documentation for each function is provided directly in
    the header. You may generate an HTML version of the corresponding
@@ -181,8 +185,8 @@ The actual functionality is tested using test cases.
    Students should not modify the prototypes for these functions in any way--doing
    so will cause the tester used by the grader to fail.
 
-   You are free and actively encourage to write other functions, as needed, to
-   support the required set of functions.
+   You are free,  _actively encouraged_, and will likely need to write other functions, as needed,
+   to support the required set of functions. 
 
 ### 6730 Requirements
 

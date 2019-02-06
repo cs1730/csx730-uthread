@@ -178,6 +178,24 @@ void uthread_join(uthread * thread);
  */
 uthread * uthread_self(void);
 
+/**
+ * Enqueues a user-mode thread into to the ready queue. If @c _CS6730_SOURCE is defined, then
+ * the ready queue is assumed to be a max heap based on the thread's priority. Otherwise, a simple 
+ * queue is assumed.
+ *
+ * @param thread     pointer to user-mode thread
+ */
+void _uthread_sched_enqueue(uthread * thread);
+
+/**
+ * Dequeues a user-mode thread into to the ready queue. If @c _CS6730_SOURCE is defined, then
+ * the ready queue is assumed to be a max heap based on the thread's priority. Otherwise, a simple 
+ * queue is assumed.
+ *
+ * @return pointer to user-mode thread
+ */
+uthread * _uthread_sched_dequeue(void);
+
 //------------------------------------------------------------------------------------------------//
 // _CS6730_SOURCE FEATURES
 //------------------------------------------------------------------------------------------------//
