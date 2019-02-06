@@ -9,6 +9,11 @@ This repository contains the skeleton code for the `csx730-uthreads` project
 assigned to the students in the Spring 2019 CSCI 4730/6730 class
 at the University of Georgia.
 
+## Updates
+
+* __2019-01-28:__ Clarified the scheduler API requirements and updated the related prototypes and
+  corresponding documentation.
+
 ## Academic Honesty
 
 You agree to the Academic Honesty policy as outlined in the course syllabus. 
