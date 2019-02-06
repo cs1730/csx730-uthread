@@ -104,9 +104,10 @@ typedef struct {
 } uthread_ctx;
 
 /** 
- * Holds the metadata for a user-mode thread. Implementers should feel free to use @p extra to point
+ * Holds the metadata for a user-mode thread. Implementers should feel free to use @c extra to point
  * to any implementation-dependent extra information they might need to properly implement the
- * library's functions.
+ * library's functions. The @c priority member is to be ignored unless @c _CS6730_SOURCE is defined
+ * (e.g., if the [PRIORITY] requirememt is being implemented).
  */
 typedef struct {
   uthread_state state;    /**< thread state */

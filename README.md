@@ -3,7 +3,7 @@
 > The fibers of all things have their tension and are strained like the strings of an instrument.
 > __--Henry David Thoreau__
 
-**DUE MON 2019-02-19 (Feb 19) @ 11:55 PM**
+**DUE FRI 2019-02-22 (Feb 22) @ 11:55 PM**
 
 This repository contains the skeleton code for the `csx730-uthreads` project
 assigned to the students in the Spring 2019 CSCI 4730/6730 class
@@ -119,6 +119,17 @@ thread added to its queue. This should also initiate an interval timer that send
 to the process. An interval of about 5,000 microseconds should suffice. The rest of
 the project boils down to careful _planning_. Drawing a state diagram before writing
 any code will help.
+
+You may find it useful to assign a thread for the calling process. This "main" thread does
+not need its own stack since it's supposed to represent the main execution of the process
+itself. This is just a suggestion--it's not a requirement, but it may simply some of your
+scheduling logic simpler.
+
+The interface for the functions in this project is intentionally similar to the one
+provided by Pthreads. To test your project, you might first try some simple programs 
+that use Pthreads, then try the same program using your project functions instead.
+Don't try to overcomplicate it. We really just want to make sure that you can give the
+illusion of parallelism via repeated user-mode context switches. 
 
 ## How to Get the Skeleton Code
 
