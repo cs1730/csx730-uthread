@@ -11,7 +11,7 @@ at the University of Georgia.
 
 ## Updates
 
-* __2019-01-28:__ Clarified the scheduler API requirements and updated the related prototypes and
+* __2019-02-06:__ Clarified the scheduler API requirements and updated the related prototypes and
   corresponding documentation.
 
 ## Academic Honesty
