@@ -27,8 +27,8 @@ notice and licensing information at the bottom of this document.
 ## User Space Threads
 
 A thread of execution is the smallest sequence of programmed instructions that can be 
-managed independently by a scheduler. A __user-mode thread__, sometimes referred to as a
-_fiber_, is one that is scheduled in user mode instead of kernel mode. In user mode,
+managed independently by a scheduler. A __user-mode thread__ is one that is scheduled
+in user mode instead of kernel mode. In user mode,
 only a single thread can execute at a time. After some time, the current thread that
 is executing will be temporarily interrupted by some signal, the disposition of which
 should trigger a context switch to another thread without requiring either thread's 
