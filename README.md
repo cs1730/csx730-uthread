@@ -71,7 +71,7 @@ should move the address stored in `rsptr` into the register for the stack pointe
 before calling a function called `some_func`:
 
 ```c
-void * rsptr =                // some address
+void * rsptr = some_address;  // some address
 __asm__("movq %0, %%rsp;"     // AssemblerTemplate
 	:                     // OutputOperands
 	: "r"(rsptr)          // InputOperands
