@@ -6,14 +6,13 @@
 /**
  * @file
  * A thread of execution is the smallest sequence of programmed instructions that can be 
- * managed independently by a scheduler. A <b>user-mode thread</b>, sometimes referred to
- * as a <i>fiber</i>, is one that is scheduled in user mode instead of kernel mode. In user mode,
- * only a single thread can execute at a time. After some time, the current thread that
- * is executing will be temporarily interrupted by some signal, the disposition of which
- * should trigger a context switch to another thread without requiring either thread's 
- * cooperation. The basic idea is that these context switches should occur so quickly that
- * all threads appear to execute concurrently. Special care should be taken to block 
- * signals during a context switch. 
+ * managed independently by a scheduler. A <b>user-mode thread</b> is one that is scheduled 
+ * in user mode instead of kernel mode. In user mode, only a single thread can execute at a 
+ * time. After some time, the current thread that is executing will be temporarily interrupted 
+ * by some signal, the disposition of which should trigger a context switch to another thread 
+ * without requiring either thread's cooperation. The basic idea is that these context switches 
+ * should occur so quickly that all threads appear to execute concurrently. Special care should 
+ * be taken to block signals during a context switch. 
  *
  * <p>
  * Each thread gets its own stack that is separate from the stack of the calling process
