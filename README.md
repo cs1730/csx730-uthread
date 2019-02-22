@@ -331,7 +331,7 @@ being subtracted from your point total. That is, they are all or nothing.
 You will still be submitting your project via Nike. Make sure your project files
 are on `nike.cs.uga.edu`. Change into the parent directory of your
 project directory. If you've followed the instructions provided in earlier in this
-document, then the name of your project directory is likely `csx730-list`.
+document, then the name of your project directory is likely `csx730-uthread`.
 While in your project parent directory, execute the following command: 
 
 ```
